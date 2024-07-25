@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Booking from './pages/Booking';
 import PageNotFound from './pages/PageNotFound';
+import { useAuth } from './utils';
 
 const App = () => {
   return (

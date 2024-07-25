@@ -18,6 +18,6 @@ authRouter.route('/change-password').post(authenticateToken, changePassword);
 authRouter.route('/reset-password').post(authenticateToken, resetPassword);
 
 // Generate OTP
-authRouter.route('/send-password-reset-email').post(sendPasswordResetEmail);
+authRouter.route('/send-pw-reset-email').post(sendPasswordResetEmail);
 
 export default authRouter;

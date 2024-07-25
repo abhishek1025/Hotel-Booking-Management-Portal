@@ -45,12 +45,7 @@ export const login = asyncErrorHandler(async (req, res) => {
 
   const authToken = generateAuthToken(userInfoForToken);
 
-  //   Cookie expiry date will be one month from date of cookie set
-  const cookieExpiryDate = new Date();
-  cookieExpiryDate.setDate(cookieExpiryDate.getDate() + 30);
-
-  //   Setting cookie to response
-  res.cookie('token', authToken, { expires: cookieExpiryDate });
+  user.password = null;
 
   sendSuccessResponse({
     res,
@@ -64,11 +59,13 @@ export const login = asyncErrorHandler(async (req, res) => {
 });
 
 export const changePassword = asyncErrorHandler(async (req, res) => {
-  const { email, currentPassword, newPassword } = req.body;
+  const { currentPassword, newPassword } = req.body;
+
+  const email = req.email;
 
   if (!email || !currentPassword || !newPassword) {
     throwError({
-      message: 'Email, Old password and new password are required',
+      message: 'Current password and new password are required',
       statusCode: HttpStatus.BAD_REQUEST,
     });
   }
@@ -107,9 +104,11 @@ export const changePassword = asyncErrorHandler(async (req, res) => {
 });
 
 export const resetPassword = asyncErrorHandler(async (req, res) => {
-  const newPassword = req.body.password;
+  const newPassword = req.body.newPassword;
   const authToken = req.authToken;
   const userInfo = req.user;
+
+  console.log(newPassword);
 
   if (!newPassword) {
     throwError({
@@ -192,8 +191,5 @@ export const sendPasswordResetEmail = asyncErrorHandler(async (req, res) => {
     res,
     message: 'Your OPT code has been sent to mail. Please check it',
     statusCode: HttpStatus.OK,
-    data: {
-      verificationCode: user.verificationCode.code,
-    },
   });
 });

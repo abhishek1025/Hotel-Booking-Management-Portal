@@ -1,10 +1,17 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { createCookie, getCookieValue, postRequest } from '../../utils';
+import {
+  createCookie,
+  getCookieValue,
+  postRequest,
+  useAuth,
+} from '../../utils';
 import { showNotification } from '../../utils/alerts';
 import { useState } from 'react';
 import { COOKIE_NAMES } from '../../constants';
 
 const SignIn = () => {
+  const { setCurrentUser } = useAuth();
+
   const navigate = useNavigate();
 
   const defaultAuthInfo = {
@@ -25,24 +32,36 @@ const SignIn = () => {
       endpoint: '/auth/login',
       data: authInfo,
     });
-
     if (res.ok) {
       const { user, token } = res.data;
-      console.log('user', user);
-      console.log('token', token);
 
-      setAuthInfo(defaultAuthInfo);
+      setCurrentUser(user);
 
-      // Set the cookies
-      createCookie(COOKIE_NAMES.TOKEN, token, 7);
-      createCookie(COOKIE_NAMES.USER, JSON.stringify(user), 7);
+      if (user.role === 'user') {
+        navigate('/');
+      } else if (user.role === 'admin') {
+        navigate('/dashboard');
+      }
+
+      // calling createCookie function to set the cookie
+      createCookie({
+        name: COOKIE_NAMES.USER,
+        value: JSON.stringify(user),
+        daysToExpire: '365d',
+      });
+
+      createCookie({
+        name: COOKIE_NAMES.TOKEN,
+        value: token,
+        daysToExpire: '365d',
+      });
 
       // Log to check if cookies are set
       console.log('Token Cookie:', getCookieValue(COOKIE_NAMES.TOKEN));
       console.log('User Cookie:', getCookieValue(COOKIE_NAMES.USER));
 
       // Navigate to dashboard
-      navigate('/dashboard');vv
+      navigate('/dashboard');
 
       // Notification after successful login
       showNotification({
