@@ -45,12 +45,7 @@ export const login = asyncErrorHandler(async (req, res) => {
 
   const authToken = generateAuthToken(userInfoForToken);
 
-  //   Cookie expiry date will be one month from date of cookie set
-  const cookieExpiryDate = new Date();
-  cookieExpiryDate.setDate(cookieExpiryDate.getDate() + 30);
-
-  //   Setting cookie to response
-  res.cookie('token', authToken, { expires: cookieExpiryDate });
+  user.password = null;
 
   sendSuccessResponse({
     res,

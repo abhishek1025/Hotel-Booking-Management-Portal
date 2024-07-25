@@ -3,6 +3,7 @@ import './App.css';
 import { DashboardLayout } from './layouts';
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
+import { useAuth } from './utils';
 
 const App = () => {
   return (
