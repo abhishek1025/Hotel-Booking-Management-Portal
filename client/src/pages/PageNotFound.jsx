@@ -1,6 +1,6 @@
-import React from "react";
-import NotFoundImage from "../../public/notFound.svg";
-import { Link } from "react-router-dom";
+import React from 'react';
+import NotFoundImage from '../../public/notFound.svg';
+import { Link } from 'react-router-dom';
 
 const PageNotFound = () => {
   return (

@@ -56,6 +56,12 @@ const SignIn = () => {
         daysToExpire: '365d',
       });
 
+      createCookie({
+        name: COOKIE_NAMES.TOKEN,
+        value: token,
+        daysToExpire: '365d',
+      });
+
       // Log to check if cookies are set
       console.log('Token Cookie:', getCookieValue(COOKIE_NAMES.TOKEN));
       console.log('User Cookie:', getCookieValue(COOKIE_NAMES.USER));

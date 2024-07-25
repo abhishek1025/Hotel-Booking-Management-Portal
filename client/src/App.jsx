@@ -3,13 +3,11 @@ import './App.css';
 import { DashboardLayout } from './layouts';
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
+import Navbar from './components/Navbar';
 import LandingPage from './pages/LandingPage';
 import Rooms from './pages/Rooms';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Booking from './pages/Booking';
 import PageNotFound from './pages/PageNotFound';
-import { useAuth } from './utils';
 
 const App = () => {
   return (
