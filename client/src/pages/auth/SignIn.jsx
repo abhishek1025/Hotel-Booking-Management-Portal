@@ -1,7 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { createCookie, postRequest } from '../../utils';
+import { createCookie, getCookieValue, postRequest } from '../../utils';
 import { showNotification } from '../../utils/alerts';
 import { useState } from 'react';
+import { COOKIE_NAMES } from '../../constants';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -18,27 +19,32 @@ const SignIn = () => {
       return { ...prevAuthInfo, [name]: value };
     });
   };
-
   const submitHandler = async (e) => {
-    console.log('run');
     e.preventDefault();
     const res = await postRequest({
       endpoint: '/auth/login',
       data: authInfo,
     });
-    console.log(res);
+
     if (res.ok) {
-      const user = res.data.user;
-      console.log('run vayo');
+      const { user, token } = res.data;
+      console.log('user', user);
+      console.log('token', token);
 
-      // navigate(paths[user.role]);
-      navigate(`/${user.role}`);
+      setAuthInfo(defaultAuthInfo);
 
-      // calling createCookie function to set the cookie
-      createCookie('user', JSON.stringify(user), 35);
-      createCookie('authToken', res.data.authToken, 35);
+      // Set the cookies
+      createCookie(COOKIE_NAMES.TOKEN, token, 7);
+      createCookie(COOKIE_NAMES.USER, JSON.stringify(user), 7);
 
-      // notification after successful login
+      // Log to check if cookies are set
+      console.log('Token Cookie:', getCookieValue(COOKIE_NAMES.TOKEN));
+      console.log('User Cookie:', getCookieValue(COOKIE_NAMES.USER));
+
+      // Navigate to dashboard
+      navigate('/dashboard');vv
+
+      // Notification after successful login
       showNotification({
         icon: 'success',
         title: 'Success!',
@@ -48,6 +54,7 @@ const SignIn = () => {
       return;
     }
 
+    // Notification on error
     showNotification({
       icon: 'error',
       title: 'Error!',
