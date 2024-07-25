@@ -1,5 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { createCookie, postRequest, useAuth } from '../../utils';
+import {
+  createCookie,
+  getCookieValue,
+  postRequest,
+  useAuth,
+} from '../../utils';
 import { showNotification } from '../../utils/alerts';
 import { useState } from 'react';
 import { COOKIE_NAMES } from '../../constants';
@@ -21,7 +26,6 @@ const SignIn = () => {
       return { ...prevAuthInfo, [name]: value };
     });
   };
-
   const submitHandler = async (e) => {
     e.preventDefault();
     const res = await postRequest({
@@ -52,7 +56,20 @@ const SignIn = () => {
         daysToExpire: '365d',
       });
 
-      // notification after successful login
+      createCookie({
+        name: COOKIE_NAMES.TOKEN,
+        value: token,
+        daysToExpire: '365d',
+      });
+
+      // Log to check if cookies are set
+      console.log('Token Cookie:', getCookieValue(COOKIE_NAMES.TOKEN));
+      console.log('User Cookie:', getCookieValue(COOKIE_NAMES.USER));
+
+      // Navigate to dashboard
+      navigate('/dashboard');
+
+      // Notification after successful login
       showNotification({
         icon: 'success',
         title: 'Success!',
@@ -62,6 +79,7 @@ const SignIn = () => {
       return;
     }
 
+    // Notification on error
     showNotification({
       icon: 'error',
       title: 'Error!',

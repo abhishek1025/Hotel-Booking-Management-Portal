@@ -7,7 +7,12 @@ export default withMT({
     fontFamily: {
       sans: ['DM Sans', 'sans-serif'],
     },
+    extend: {
+      colors: {
+        primaryRed: '#EF4444',
+        primaryBlue: '#2E4D9D',
+      },
+    },
   },
   plugins: [],
 });
-

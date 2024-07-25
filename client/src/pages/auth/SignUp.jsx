@@ -47,7 +47,7 @@ const SignUp = () => {
         icon: 'success',
         title: 'Success!',
         message: 'Account created successfully',
-      });
+    });
       navigate('/login');
 
       return;
