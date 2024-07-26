@@ -56,3 +56,12 @@ export const HttpStatus = {
   INSUFFICIENT_STORAGE: 507,
   NETWORK_AUTHENTICATION_REQUIRED: 511,
 };
+
+export const BOOKING_STATUS = {
+  IN_CART: 'InCart',
+  BOOKED: 'Booked',
+  CHECKED_IN: 'CheckedIn',
+  CHECKED_OUT: 'CheckedOut',
+  CANCELLED: 'Cancelled',
+  AVAILABLE: 'Available',
+};
