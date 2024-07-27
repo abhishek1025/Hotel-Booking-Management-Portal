@@ -6,6 +6,7 @@ import userRouter from './userRoutes.js';
 import staffRouter from './staffRoutes.js';
 import bookingRouter from './bookingRoutes.js';
 import feedbackRouter from './feedbackRoutes.js';
+import dashboardDataRouter from './dashboardRoutes.js';
 
 const apiRouter = express.Router();
 
@@ -37,6 +38,10 @@ const apiRoutes = [
   {
     router: feedbackRouter,
     path: '/feedbacks',
+  },
+  {
+    router: dashboardDataRouter,
+    path: '/dashboard-data',
   },
 ];
 

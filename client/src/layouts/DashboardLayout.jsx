@@ -15,7 +15,7 @@ const DashboardLayout = () => {
         <Header />
 
         <div className="p-5 h-full w-full">
-          <Card className="text-black border h-full w-full">
+          <Card className="text-black border h-full w-full overflow-scroll">
             <CardBody>
               <Outlet />
             </CardBody>

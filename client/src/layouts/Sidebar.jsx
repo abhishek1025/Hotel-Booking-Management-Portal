@@ -12,15 +12,6 @@ const Sidebar = () => {
     <div>
       <Card className="h-full w-[230px] p-4 pt-0 bg-white border-r border-gray-200 shadow-none rounded-none flex flex-col justify-between">
         <div>
-          <Link>
-            <div className="mb-2 px-4 pt-0 pb-2">
-              <img
-                src=""
-                alt=""
-                className="w-42 lg:max-h-20 m-3 object-center sm:max-h-[50px]"
-              />
-            </div>
-          </Link>
 
           <List className="min-w-full">
             {SIDEBAR_LINKS.map((link, index) => {
