@@ -13,6 +13,7 @@ import LandingPage from './pages/LandingPage';
 import PageNotFound from './pages/PageNotFound';
 import Rooms from './pages/Rooms';
 import Dashboard from './pages/dashboard/Dashboard';
+import BookingTable from './pages/dashboard/bookings/BookingsTable';
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="menu-items" element={<MenuItemsTable />}></Route>
           <Route path="staffs" element={<StaffTable />}></Route>
           <Route path="feedbacks" element={<FeedbackTable />}></Route>
+          <Route path="bookings" element={<BookingTable />}></Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

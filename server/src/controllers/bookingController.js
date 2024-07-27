@@ -418,10 +418,20 @@ export const cancelBooking = asyncErrorHandler(async (req, res) => {
 export const getAllBookings = asyncErrorHandler(async (req, res) => {
   const { status } = req.query;
 
-  const filter = { status };
+  const filter = status
+    ? { status }
+    : {
+        status: {
+          $in: [
+            BOOKING_STATUS.BOOKED,
+            BOOKING_STATUS.CHECKED_IN,
+            BOOKING_STATUS.CHECKED_OUT,
+          ],
+        },
+      };
 
   // Fetch all bookings or filtered bookings based on the provided status
-  const bookings = await Booking.find(filter);
+  const bookings = await Booking.find(filter).populate('user room');
 
   // Respond with the list of bookings
   sendSuccessResponse({

@@ -1,13 +1,12 @@
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { COOKIE_NAMES } from '../../constants';
 import {
   createCookie,
-  getCookieValue,
   postRequest,
-  useAuth,
+  useAuth
 } from '../../utils';
 import { showNotification } from '../../utils/alerts';
-import { useState } from 'react';
-import { COOKIE_NAMES } from '../../constants';
 
 const SignIn = () => {
   const { setCurrentUser } = useAuth();
@@ -55,19 +54,6 @@ const SignIn = () => {
         value: token,
         daysToExpire: '365d',
       });
-
-      createCookie({
-        name: COOKIE_NAMES.TOKEN,
-        value: token,
-        daysToExpire: '365d',
-      });
-
-      // Log to check if cookies are set
-      console.log('Token Cookie:', getCookieValue(COOKIE_NAMES.TOKEN));
-      console.log('User Cookie:', getCookieValue(COOKIE_NAMES.USER));
-
-      // Navigate to dashboard
-      navigate('/dashboard');
 
       // Notification after successful login
       showNotification({
