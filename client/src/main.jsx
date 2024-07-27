@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
 import { UserAuthContextProvider } from './contexts/authContext.jsx';
 
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Create a client

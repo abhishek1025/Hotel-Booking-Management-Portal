@@ -16,6 +16,7 @@ import PageNotFound from './pages/PageNotFound';
 import Rooms from './pages/rooms/Rooms';
 import UserBookingTable from './pages/user-bookings/UserBookingTable';
 import UserBookingHistory from './pages/user-bookings/UserBookingHistory';
+import UserFeedbackForm from './pages/user-bookings/UserFeedbackForm';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/bookings" element={<UserBookingTable />} />
           <Route path="/booking-history" element={<UserBookingHistory />} />
+          <Route path="/feedbacks" element={<UserFeedbackForm />} />
         </Route>
 
         <Route path="/login" element={<SignIn />} />

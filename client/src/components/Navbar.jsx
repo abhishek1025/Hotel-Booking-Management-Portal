@@ -46,6 +46,11 @@ const Navbar = () => {
       name: 'Bookings History',
       route: '/booking-history',
     },
+
+    {
+      name: 'Feedback',
+      route: '/feedbacks',
+    },
   ];
 
   useEffect(() => {
