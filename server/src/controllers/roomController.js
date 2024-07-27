@@ -138,8 +138,9 @@ export const deleteRoom = asyncErrorHandler(async (req, res) => {
     deleteFile(imagePath); // Use the deleteFile utility to remove each image
   });
 
-  // Delete the room record
-  await Room.findByIdAndDelete(roomID);
+  room.isDeleted = true;
+
+  await room.save();
 
   sendSuccessResponse({
     res,
@@ -148,7 +149,9 @@ export const deleteRoom = asyncErrorHandler(async (req, res) => {
 });
 
 export const getAllRooms = asyncErrorHandler(async (req, res) => {
-  const rooms = await Room.find();
+  const rooms = await Room.find({
+    isDeleted: false,
+  });
 
   sendSuccessResponse({
     res,

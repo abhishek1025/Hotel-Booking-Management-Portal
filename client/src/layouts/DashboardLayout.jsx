@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import { Card, CardBody } from '@material-tailwind/react';
 
 const DashboardLayout = () => {
   return (
@@ -13,8 +14,12 @@ const DashboardLayout = () => {
         {/* Header */}
         <Header />
 
-        <div className="p-8 bg-gray-200">
-          <Outlet />
+        <div className="p-5 h-full w-full">
+          <Card className="text-black border h-full w-full">
+            <CardBody>
+              <Outlet />
+            </CardBody>
+          </Card>
         </div>
       </div>
     </div>

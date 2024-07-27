@@ -134,25 +134,28 @@ export const deleteStaffMember = asyncErrorHandler(async (req, res) => {
     });
   }
 
-  // Find the staff member by ID and update isActive to false
-  const staffMember = await Staff.findByIdAndUpdate(
-    staffID,
-    { isActive: false },
-    { new: true }
-  );
+  // Find the staff member by ID
+  const staffMember = await Staff.findById(staffID);
 
-  // If staff member is not found, throw an error
   if (!staffMember) {
-    throwError({
-      message: 'Staff member not found',
-      statusCode: HttpStatus.NOT_FOUND,
-    });
+    return res.status(404).json({ message: 'Staff member not found' });
   }
+
+  // Toggle the isActive status
+  staffMember.isActive = !staffMember.isActive;
+
+  // Save the updated staff member
+  await staffMember.save();
+
+  // Determine the appropriate message based on the new status
+  const statusMessage = staffMember.isActive
+    ? 'Staff member activated successfully'
+    : 'Staff member deactivated successfully';
 
   // Send a success response
   sendSuccessResponse({
     res,
-    message: 'Staff member deactivated successfully',
+    message: statusMessage,
     data: staffMember,
   });
 });
