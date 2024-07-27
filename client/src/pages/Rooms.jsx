@@ -3,27 +3,73 @@ import { PrimaryButton } from '../ui/buttons/Buttons';
 import { Link } from 'react-router-dom';
 import { LandingHeader } from '../ui/Headings';
 import { FaHeart } from 'react-icons/fa';
+import { getRequest, postRequest } from '../utils/apiHandler';
+import { useEffect, useState } from 'react';
+import { formatImageUrl } from '../utils';
 
-const RoomCard = ({ image, title, price, desc }) => {
+const RoomCard = ({ room }) => {
+  const [isCart, setIsCart] = useState(false);
+
+  const handleAddToCart = async () => {
+    const response = await postRequest({
+      endpoint: '/bookings/cart',
+      data: {
+        room: room._id,
+        pricePerNight: room.pricePerNight,
+      },
+    });
+
+    if (response.ok) {
+      setIsCart(true);
+      console.log('Room added to favorites/cart:', response.data);
+    }
+  };
   return (
-    <Card className="w-96 relative">
-      <div className="absolute top-3 right-3 bg-white p-2 rounded-full">
-        <FaHeart
-          title="Favorites"
-          className="text-xl cursor-pointer text-red-400"
-        />
+    <Card className="w-80 bg-white shadow-md rounded-lg overflow-hidden relative">
+      <div className="relative">
+        {/* Display images in a carousel or list */}
+        <div className="relative">
+          <div className="w-full h-40 overflow-hidden">
+            {room.images && room.images.length > 0 ? (
+              <img
+                src={formatImageUrl(room.images[0])}
+                alt={room.roomType}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full flex items-center justify-center bg-gray-200">
+                No Image Available
+              </div>
+            )}
+          </div>
+          <div className="absolute top-3 right-3 bg-white p-2 rounded-full shadow-md">
+            <FaHeart
+              title={isCart ? 'Remove from Favorites' : 'Add to Favorites'}
+              className={`text-xl cursor-pointer ${
+                isCart ? 'text-red-500' : 'text-gray-500'
+              }`}
+              onClick={handleAddToCart}
+            />
+          </div>
+        </div>
       </div>
-      <img src={image} alt="card-image" />
-      <CardBody>
-        <Typography variant="h5" color="blue-gray" className="mb-2">
-          {title}
-        </Typography>{' '}
-        <p color="blue-gray" className="mb-2">
-          {desc}
-        </p>
-        <Typography>Price: ${price}</Typography>
-        <PrimaryButton className="mt-4">
-          <Link to={`/booking/:id`}>Book now</Link>
+      <CardBody className="p-4">
+        <Typography
+          variant="h5"
+          color="blue-gray"
+          className="mb-2 font-semibold"
+        >
+          Room Type: {room.roomType}
+        </Typography>
+        <p className="text-gray-600 mb-2">Description:{room.description}</p>
+        <Typography className="text-gray-500 mb-2">
+          Capacity: {room.capacity} guests
+        </Typography>
+        <Typography className="text-lg font-bold">
+          Price: ${room.pricePerNight}
+        </Typography>
+        <PrimaryButton className="mt-4 bg-blue-500 hover:bg-blue-600 text-white">
+          <Link to={`/booking/${room._id}`}>Book now</Link>
         </PrimaryButton>
       </CardBody>
     </Card>
@@ -31,42 +77,32 @@ const RoomCard = ({ image, title, price, desc }) => {
 };
 
 const Rooms = () => {
-  const rooms = [
-    {
-      image: '/images/room1.jpg',
-      title: 'Double Room 5',
-      desc: 'Awesome Double Room 5 and is suitable for everyone',
-      price: 330.0,
-    },
-    {
-      image: '/images/room2.jpg',
-      title: 'Family Room 3',
-      price: 165.0,
-      desc: 'Awesome Family Room 3 and is suitable for every family members',
-    },
-    {
-      image: '/images/room3.jpg',
-      title: 'Luxury Room 3',
-      desc: 'Awesome Luxury Room 3, expensive but worth the price, comfy bed and sofa!',
+  const [rooms, setRooms] = useState([]);
 
-      price: 440.0,
-    },
-  ];
+  const getAllRooms = async () => {
+    const res = await getRequest({
+      endpoint: '/rooms',
+    });
+
+    if (res.ok) {
+      setRooms(res.data);
+    }
+  };
+
+  useEffect(() => {
+    getAllRooms();
+  }, []);
 
   return (
-    <div className="mt-[110px]">
+    <div className="mt-[110px] px-4">
       <LandingHeader>Our Rooms</LandingHeader>
       <br />
-      <div className="flex flex-wrap gap-20 justify-center ">
-        {rooms.map((room, index) => (
-          <RoomCard
-            key={index}
-            image={room.image}
-            title={room.title}
-            price={room.price}
-            desc={room.desc}
-          />
-        ))}
+      <div className="grid grid-cols-3 ">
+        <div className="w-[80%] mx-auto">
+          {rooms.map((room) => (
+            <RoomCard key={room._id} room={room} />
+          ))}
+        </div>
       </div>
     </div>
   );

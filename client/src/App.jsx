@@ -14,6 +14,7 @@ import PageNotFound from './pages/PageNotFound';
 import Rooms from './pages/Rooms';
 import Dashboard from './pages/dashboard/Dashboard';
 import BookingTable from './pages/dashboard/bookings/BookingsTable';
+import Cart from './pages/Cart';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="/rooms" element={<Rooms />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/booking/:roomId" element={<Booking />} />
         </Route>
 
