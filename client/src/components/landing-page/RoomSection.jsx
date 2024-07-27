@@ -8,6 +8,7 @@ import {
 } from '@material-tailwind/react';
 import { FaCoffee, FaWifi, FaUtensils, FaTv } from 'react-icons/fa';
 import { PrimaryButton } from '../../ui/buttons/Buttons';
+import { Link } from 'react-router-dom';
 
 const RoomCard = ({ image, title, price, desc }) => {
   return (
@@ -21,7 +22,9 @@ const RoomCard = ({ image, title, price, desc }) => {
           {desc}
         </p>
         <Typography>Price: ${price}</Typography>
-        <PrimaryButton className="mt-4">Learn More</PrimaryButton>
+        <Link to="/rooms">
+          <PrimaryButton className="mt-4">Learn More</PrimaryButton>
+        </Link>
       </CardBody>
     </Card>
   );

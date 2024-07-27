@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import {
+  Avatar,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+  Typography,
+} from '@material-tailwind/react';
+import { useEffect, useState } from 'react';
 import { FaHeart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../utils';
-import {
-  Menu,
-  MenuHandler,
-  MenuList,
-  MenuItem,
-  Avatar,
-  Typography,
-} from '@material-tailwind/react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,6 +30,21 @@ const Navbar = () => {
     {
       name: 'Rooms',
       route: '/rooms',
+    },
+
+    {
+      name: 'Cart',
+      route: '/cart',
+    },
+
+    {
+      name: 'Bookings',
+      route: '/bookings',
+    },
+
+    {
+      name: 'Bookings History',
+      route: '/booking-history',
     },
   ];
 

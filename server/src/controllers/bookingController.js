@@ -177,7 +177,8 @@ export const updateBookings = asyncErrorHandler(async (req, res) => {
 
 export const getUserBookings = asyncErrorHandler(async (req, res) => {
   const user = req._id;
-  const { status } = req.query; // Get the status filter from query parameters
+  const { status } = req.body; // Get the status filter from query parameters
+
 
   if (!user) {
     throwError({
@@ -191,7 +192,9 @@ export const getUserBookings = asyncErrorHandler(async (req, res) => {
 
   // If status is provided, add it to the query
   if (status) {
-    query.status = status;
+    query.status = {
+      $in: status,
+    };
   }
 
   // Fetch bookings based on the query
@@ -438,5 +441,25 @@ export const getAllBookings = asyncErrorHandler(async (req, res) => {
     res,
     message: 'Bookings retrieved successfully',
     data: bookings,
+  });
+});
+
+export const checkIfRoomIsInCart = asyncErrorHandler(async (req, res) => {
+  const userId = req._id;
+  const roomId = req.params.roomId;
+
+  const booking = await Booking.findOne({
+    user: userId,
+    status: BOOKING_STATUS.IN_CART,
+    room: roomId,
+  });
+
+  console.log(booking);
+
+  sendSuccessResponse({
+    res,
+    data: {
+      isInCart: !!booking,
+    },
   });
 });

@@ -4,17 +4,18 @@ import { DashboardLayout } from './layouts';
 import AppLayout from './layouts/AppLayout';
 import SignIn from './pages/auth/SignIn';
 import SignUp from './pages/auth/SignUp';
-import Booking from './pages/Booking';
+import Cart from './pages/cart/Cart';
+import BookingTable from './pages/dashboard/bookings/BookingsTable';
+import Dashboard from './pages/dashboard/Dashboard';
 import FeedbackTable from './pages/dashboard/FeedbackTable';
 import MenuItemsTable from './pages/dashboard/menu/MenuTables';
 import RoomsTable from './pages/dashboard/rooms/RoomsTable';
 import StaffTable from './pages/dashboard/staff/StaffTable';
 import LandingPage from './pages/LandingPage';
 import PageNotFound from './pages/PageNotFound';
-import Rooms from './pages/Rooms';
-import Dashboard from './pages/dashboard/Dashboard';
-import BookingTable from './pages/dashboard/bookings/BookingsTable';
-import Cart from './pages/Cart';
+import Rooms from './pages/rooms/Rooms';
+import UserBookingTable from './pages/user-bookings/UserBookingTable';
+import UserBookingHistory from './pages/user-bookings/UserBookingHistory';
 
 const App = () => {
   return (
@@ -24,7 +25,8 @@ const App = () => {
           <Route index element={<LandingPage />} />
           <Route path="/rooms" element={<Rooms />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="/booking/:roomId" element={<Booking />} />
+          <Route path="/bookings" element={<UserBookingTable />} />
+          <Route path="/booking-history" element={<UserBookingHistory />} />
         </Route>
 
         <Route path="/login" element={<SignIn />} />

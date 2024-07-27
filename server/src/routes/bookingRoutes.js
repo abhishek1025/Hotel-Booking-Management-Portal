@@ -3,6 +3,7 @@ import {
   addFoodItemsToBooking,
   addToCart,
   cancelBooking,
+  checkIfRoomIsInCart,
   checkInBooking,
   checkoutBooking,
   getAllBookings,
@@ -28,7 +29,7 @@ bookingRouter.delete('/cart/:bookingId', removeFromCart);
 // Route to update multiple bookings
 bookingRouter.put('/book-room', updateBookings);
 
-bookingRouter.get('/my-bookings', getUserBookings);
+bookingRouter.post('/my-bookings', getUserBookings);
 
 bookingRouter.get('/all', getAllBookings);
 
@@ -41,5 +42,7 @@ bookingRouter.patch('/:bookingId/add-food', addFoodItemsToBooking);
 // Route to add food items to a booking
 bookingRouter.patch('/:bookingId/check-out', checkoutBooking);
 bookingRouter.patch('/:bookingId/cancel', cancelBooking);
+
+bookingRouter.get('/check-cart/room/:roomId', checkIfRoomIsInCart);
 
 export default bookingRouter;

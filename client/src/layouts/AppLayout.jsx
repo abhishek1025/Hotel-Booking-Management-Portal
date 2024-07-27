@@ -3,12 +3,14 @@ import Navbar from '../components/Navbar';
 
 const AppLayout = () => {
   return (
-    <div>
-      <div className="fixed z-50 top-0 w-full">
+    <>
+      <div className="sticky top-0 z-20">
         <Navbar />
       </div>
-      <Outlet />
-    </div>
+      <div className="mt-10">
+        <Outlet />
+      </div>
+    </>
   );
 };
 
