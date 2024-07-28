@@ -1,14 +1,10 @@
 import {
-  Button,
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
-  Typography,
+  Typography
 } from '@material-tailwind/react';
-import { FaCoffee, FaWifi, FaUtensils, FaTv } from 'react-icons/fa';
-import { PrimaryButton } from '../../ui/buttons/Buttons';
 import { Link } from 'react-router-dom';
+import { PrimaryButton } from '../../ui/buttons/Buttons';
 
 const RoomCard = ({ image, title, price, desc }) => {
   return (

@@ -1,12 +1,9 @@
-import React from 'react';
-import './landingpage.css';
-import Navbar from '../Navbar';
 import LandingBG from '../../assets/images/landingbg.jpg';
 import { HeroButton } from '../../ui/buttons/Buttons';
-import SearchFilter from '../SearchFilter';
+import './landingpage.css';
 const Hero = () => {
   return (
-    <div className="relative w-full h-screen flex items-center justify-center flex-col">
+    <div className="relative w-full h-screen flex items-center justify-center flex-col -mt-10">
       <div className="absolute inset-0 -z-20">
         <img src={LandingBG} alt="" />
       </div>

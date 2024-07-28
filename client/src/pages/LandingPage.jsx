@@ -1,11 +1,9 @@
-import React from 'react';
+import ContactUs from '../components/landing-page/ContactUs';
 import Hero from '../components/landing-page/Hero';
 import OurServices from '../components/landing-page/OurServices';
-import { SectionGap } from '../ui/SectionGap';
-import Testimonials from '../components/landing-page/Testimonials';
-import ContactUs from '../components/landing-page/ContactUs';
-import Navbar from '../components/Navbar';
 import RoomSection from '../components/landing-page/RoomSection';
+import Testimonials from '../components/landing-page/Testimonials';
+import { SectionGap } from '../ui/SectionGap';
 
 const LandingPage = () => {
   return (

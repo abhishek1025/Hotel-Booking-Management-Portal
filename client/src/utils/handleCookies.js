@@ -30,8 +30,7 @@ export const createCookie = ({ name, value, daysToExpire = '7d' }) => {
 
 export const removeCookie = () => {
   document.cookie =
-    COOKIE_NAMES.AUTH_TOKEN +
-    '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    COOKIE_NAMES.TOKEN + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   document.cookie =
-    COOKIE_NAMES.ROLE + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    COOKIE_NAMES.USER + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 };

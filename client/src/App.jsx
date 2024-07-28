@@ -17,6 +17,7 @@ import Rooms from './pages/rooms/Rooms';
 import UserBookingTable from './pages/user-bookings/UserBookingTable';
 import UserBookingHistory from './pages/user-bookings/UserBookingHistory';
 import UserFeedbackForm from './pages/user-bookings/UserFeedbackForm';
+import ProtectRoutes from './components/ProtectRoutes';
 
 const App = () => {
   return (
@@ -25,23 +26,29 @@ const App = () => {
         <Route path="/" element={<AppLayout />}>
           <Route index element={<LandingPage />} />
           <Route path="/rooms" element={<Rooms />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/bookings" element={<UserBookingTable />} />
-          <Route path="/booking-history" element={<UserBookingHistory />} />
-          <Route path="/feedbacks" element={<UserFeedbackForm />} />
+
+          <Route element={<ProtectRoutes />}>
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/bookings" element={<UserBookingTable />} />
+            <Route path="/booking-history" element={<UserBookingHistory />} />
+            <Route path="/feedbacks" element={<UserFeedbackForm />} />
+          </Route>
         </Route>
 
         <Route path="/login" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
 
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="rooms" element={<RoomsTable />}></Route>
-          <Route path="menu-items" element={<MenuItemsTable />}></Route>
-          <Route path="staffs" element={<StaffTable />}></Route>
-          <Route path="feedbacks" element={<FeedbackTable />}></Route>
-          <Route path="bookings" element={<BookingTable />}></Route>
+        <Route element={<ProtectRoutes />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="rooms" element={<RoomsTable />}></Route>
+            <Route path="menu-items" element={<MenuItemsTable />}></Route>
+            <Route path="staffs" element={<StaffTable />}></Route>
+            <Route path="feedbacks" element={<FeedbackTable />}></Route>
+            <Route path="bookings" element={<BookingTable />}></Route>
+          </Route>
         </Route>
+
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
