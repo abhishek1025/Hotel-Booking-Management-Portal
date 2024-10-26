@@ -1,4 +1,4 @@
-# Hotel Management System
+# Hotel Booking Management Portal
 
 This project is a web-based platform for efficiently managing hotel operations, including room bookings, food orders, guest check-ins/check-outs, staff management, and hotel analytics. The platform features an intuitive interface for both administrators and users, providing real-time insights and seamless interactions.
 
