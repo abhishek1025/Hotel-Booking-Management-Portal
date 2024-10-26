@@ -41,6 +41,7 @@ This project is a web-based platform for efficiently managing hotel operations, 
 ![Screenshot](./screenshots/1.png)
 ![Screenshot](./screenshots/2.png)
 ![Screenshot](./screenshots/3.png)
+![Screenshot](./screenshots/16.png)
 ![Screenshot](./screenshots/4.png)
 ![Screenshot](./screenshots/5.png)
 ![Screenshot](./screenshots/6.png)
@@ -52,3 +53,4 @@ This project is a web-based platform for efficiently managing hotel operations, 
 ![Screenshot](./screenshots/12.png)
 ![Screenshot](./screenshots/13.png)
 ![Screenshot](./screenshots/14.png)
+![Screenshot](./screenshots/15.png)
